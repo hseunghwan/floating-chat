@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPIKE / THROWAWAY: WebView 플로팅 질문 실현 가능성 확인용 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:label="FloatAsk Spike" android:theme="@style/Floating">
+        <activity
+            android:name=".AskActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity=""
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 대안 A: 고정 라벨 슬롯. 실제 앱에서는 사용자가 켜고 끔 -->
+        <activity-alias
+            android:name=".AskDefault"
+            android:targetActivity=".AskActivity"
+            android:label="질문하기"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <meta-data android:name="suffix" android:value="" />
+        </activity-alias>
+
+        <activity-alias
+            android:name=".AskMeaning"
+            android:targetActivity=".AskActivity"
+            android:label="뜻 물어보기"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <meta-data android:name="suffix" android:value="가 무슨 뜻이야?" />
+        </activity-alias>
+    </application>
+</manifest>
